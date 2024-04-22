@@ -1,8 +1,7 @@
 {
     "name": "spendwise",
     "version": "0.1.0",
-    "private": true,
-    "proxy": "http://localhost:4444/",
+    "homepage": ".",
     "dependencies": {
         "@hookform/resolvers": "^3.3.4",
         "@testing-library/jest-dom": "^5.17.0",
