@@ -9,6 +9,8 @@ import { selectUserId } from "./selectors";
 import { initialUserState } from "./reducers";
 import { Spinner } from "./components/spinner/Spinner";
 
+import RecordDetails from "./components/pages/record-details/RecordDetails";
+
 const Header = lazy(() => import("./components/header/Header"));
 const SideWindow = lazy(() => import("./components/side-window/SideWindow"));
 const Main = lazy(() => import("./components/pages/main/Main"));
@@ -18,9 +20,6 @@ const Footer = lazy(() => import("./components/footer/Footer"));
 const Records = lazy(() => import("./components/pages/records/Records"));
 const RecordCreator = lazy(() =>
     import("./components/pages/record-creator/RecordCreator")
-);
-const RecordDetails = lazy(() =>
-    import("./components/pages/record-details/RecordDetails")
 );
 const AccountCreator = lazy(() =>
     import("./components/pages/account-creator/AccountCreator")
