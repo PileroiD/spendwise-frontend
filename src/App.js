@@ -17,108 +17,108 @@ const Login = lazy(() => import("./components/pages/auth/Login"));
 const Footer = lazy(() => import("./components/footer/Footer"));
 const Records = lazy(() => import("./components/pages/records/Records"));
 const RecordCreator = lazy(() =>
-    import("./components/pages/record-creator/RecordCreator")
+	import("./components/pages/record-creator/RecordCreator")
 );
 const RecordDetails = lazy(() =>
-    import("./components/pages/record-details/RecordDetails")
+	import("./components/pages/record-details/RecordDetails")
 );
 const AccountCreator = lazy(() =>
-    import("./components/pages/account-creator/AccountCreator")
+	import("./components/pages/account-creator/AccountCreator")
 );
 const Accounts = lazy(() => import("./components/pages/accounts/Accounts"));
 const ErrorPage = lazy(() => import("./components/pages/error-page/ErrorPage"));
 
 const AppContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 1280px;
-    min-height: 100%;
-    background-color: #fff;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 1280px;
+	min-height: 100%;
+	background-color: #fff;
+	margin: 0 auto;
+	overflow: hidden;
+	position: relative;
 `;
 
 const Page = styled.main`
-    padding-top: 70px;
+	padding-top: 70px;
 
-    .spinner {
-        display: block;
-        margin: 0 auto;
-    }
+	.spinner {
+		display: block;
+		margin: 0 auto;
+	}
 `;
 
 function App() {
-    const dispatch = useDispatch();
-    const isAuthenticated = useSelector(selectUserId);
+	const dispatch = useDispatch();
+	const isAuthenticated = useSelector(selectUserId);
 
-    useEffect(() => {
-        const user = sessionStorage.getItem("user");
+	useEffect(() => {
+		const user = sessionStorage.getItem("user");
 
-        if (!user) {
-            dispatch(setUser(initialUserState));
-            return;
-        }
+		if (!user) {
+			dispatch(setUser(initialUserState));
+			return;
+		}
 
-        dispatch(setUser(JSON.parse(user)));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+		dispatch(setUser(JSON.parse(user)));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            request("/accounts?records=true", "GET").then((response) => {
-                if (!response.error) {
-                    dispatch(setAccounts(response.accounts));
-                }
-            });
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isAuthenticated]);
+	useEffect(() => {
+		if (isAuthenticated) {
+			request("/accounts?records=true", "GET").then((response) => {
+				if (!response.error) {
+					dispatch(setAccounts(response.accounts));
+				}
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isAuthenticated]);
 
-    return (
-        <AppContainer>
-            <SideWindow />
-            <Header />
+	return (
+		<AppContainer>
+			<SideWindow />
+			<Header />
 
-            <Page>
-                <Suspense fallback={<Spinner />}>
-                    <Routes>
-                        <Route path="/" element={<Main />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
+			<Page>
+				<Suspense fallback={<Spinner />}>
+					<Routes>
+						<Route path="/" element={<Main />} />
+						<Route path="/register" element={<Register />} />
+						<Route path="/login" element={<Login />} />
 
-                        <Route path="/incomes" element={<Records />} />
-                        <Route
-                            path="/add-incomes"
-                            element={<RecordCreator />}
-                        />
+						<Route path="/incomes" element={<Records />} />
+						<Route
+							path="/add-incomes"
+							element={<RecordCreator />}
+						/>
 
-                        <Route path="/record/:id" element={<RecordDetails />} />
+						<Route path="/record/:id" element={<RecordDetails />} />
 
-                        <Route path="/expenses" element={<Records />} />
-                        <Route
-                            path="/add-expenses"
-                            element={<RecordCreator />}
-                        />
+						<Route path="/expenses" element={<Records />} />
+						<Route
+							path="/add-expenses"
+							element={<RecordCreator />}
+						/>
 
-                        <Route
-                            path="/add-accounts"
-                            element={<AccountCreator />}
-                        />
-                        <Route path="/accounts" element={<Accounts />} />
+						<Route
+							path="/add-accounts"
+							element={<AccountCreator />}
+						/>
+						<Route path="/accounts" element={<Accounts />} />
 
-                        <Route path="/history" element={<Records />} />
+						<Route path="/history" element={<Records />} />
 
-                        <Route path="/error-page" element={<ErrorPage />} />
-                        <Route path="*" element={<ErrorPage />} />
-                    </Routes>
-                </Suspense>
-            </Page>
+						<Route path="/error-page" element={<ErrorPage />} />
+						<Route path="*" element={<ErrorPage />} />
+					</Routes>
+				</Suspense>
+			</Page>
 
-            <Footer />
-        </AppContainer>
-    );
+			<Footer />
+		</AppContainer>
+	);
 }
 
 export default App;
