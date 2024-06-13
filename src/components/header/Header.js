@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import { Button } from "../button-component/Button";
-import { Hamburger } from "../hamburger/Hamburger";
+import { Button } from "../button-component/Button.tsx";
+import { Hamburger } from "../hamburger/Hamburger.tsx";
 
 import { request } from "../../utils";
 import { setUser } from "../../actions";

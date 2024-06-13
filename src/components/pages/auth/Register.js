@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { Form } from "./form/Form";
-import ErrorBoundary from "../../error-boundary/ErrorBoundary";
+import ErrorBoundary from "../../error-boundary/ErrorBoundary.tsx";
 
 import { useDefineFormikSettings } from "../../../hooks";
 import { request } from "../../../utils";
@@ -13,90 +13,90 @@ import { setUser } from "../../../actions";
 import { selectUserId } from "../../../selectors";
 
 const RegisterContainer = ({ className }) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [serverError, setServerError] = useState(null);
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [serverError, setServerError] = useState(null);
 
-    const { initialValues, yupSchema, isLogin } = useDefineFormikSettings();
+	const { initialValues, yupSchema, isLogin } = useDefineFormikSettings();
 
-    const isAuthenticated = useSelector(selectUserId);
+	const isAuthenticated = useSelector(selectUserId);
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-    if (isAuthenticated) {
-        navigate("/");
-    }
+	if (isAuthenticated) {
+		navigate("/");
+	}
 
-    const formik = useFormik({
-        initialValues: initialValues,
-        validationSchema: yupSchema,
-        onSubmit: (values, { resetForm }) => {
-            setIsSubmitting(true);
-            resetForm();
+	const formik = useFormik({
+		initialValues: initialValues,
+		validationSchema: yupSchema,
+		onSubmit: (values, { resetForm }) => {
+			setIsSubmitting(true);
+			resetForm();
 
-            setTimeout(() => {
-                handleSubmit(values);
-                setIsSubmitting(false);
-            }, 1000);
-        },
-    });
+			setTimeout(() => {
+				handleSubmit(values);
+				setIsSubmitting(false);
+			}, 1000);
+		},
+	});
 
-    useEffect(() => {
-        document.title = "Sign up";
-    }, []);
+	useEffect(() => {
+		document.title = "Sign up";
+	}, []);
 
-    useEffect(() => {
-        const timerId = setTimeout(() => {
-            setServerError(null);
-        }, 3000);
+	useEffect(() => {
+		const timerId = setTimeout(() => {
+			setServerError(null);
+		}, 3000);
 
-        return () => clearTimeout(timerId);
-    }, [serverError]);
+		return () => clearTimeout(timerId);
+	}, [serverError]);
 
-    const handleSubmit = (values) => {
-        const data = {
-            email: values.email,
-            password: values.password,
-        };
+	const handleSubmit = (values) => {
+		const data = {
+			email: values.email,
+			password: values.password,
+		};
 
-        request("/register", "POST", data).then(({ error, user }) => {
-            if (error) {
-                setServerError(error);
-                return;
-            }
+		request("/register", "POST", data).then(({ error, user }) => {
+			if (error) {
+				setServerError(error);
+				return;
+			}
 
-            sessionStorage.setItem("user", JSON.stringify(user));
-            dispatch(setUser(user));
-            navigate("/");
-        });
-    };
+			sessionStorage.setItem("user", JSON.stringify(user));
+			dispatch(setUser(user));
+			navigate("/");
+		});
+	};
 
-    return (
-        <section className={className}>
-            <h2>Sign up</h2>
+	return (
+		<section className={className}>
+			<h2>Sign up</h2>
 
-            <ErrorBoundary>
-                <Form
-                    formik={formik}
-                    isLogin={isLogin}
-                    isSubmitting={isSubmitting}
-                    serverError={serverError}
-                />
-            </ErrorBoundary>
-        </section>
-    );
+			<ErrorBoundary>
+				<Form
+					formik={formik}
+					isLogin={isLogin}
+					isSubmitting={isSubmitting}
+					serverError={serverError}
+				/>
+			</ErrorBoundary>
+		</section>
+	);
 };
 
 const Register = styled(RegisterContainer)`
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	left: 50%;
 
-    & h2 {
-        text-align: center;
-        margin-bottom: 30px;
-    }
+	& h2 {
+		text-align: center;
+		margin-bottom: 30px;
+	}
 `;
 
 export default Register;

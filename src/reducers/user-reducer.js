@@ -1,19 +1,19 @@
-import { ACTION_TYPE } from "../actions";
+import { ActionType } from "../actions";
 
 export const initialUserState = {
-    id: "",
-    email: "",
-    registeredAt: "",
+	id: "",
+	email: "",
+	registeredAt: "",
 };
 
 export const userReducer = (state = initialUserState, action) => {
-    switch (action.type) {
-        case ACTION_TYPE.SET_USER:
-            return {
-                ...state,
-                ...action.payload,
-            };
-        default:
-            return state;
-    }
+	switch (action.type) {
+		case ActionType.SET_USER:
+			return {
+				...state,
+				...action.payload,
+			};
+		default:
+			return state;
+	}
 };

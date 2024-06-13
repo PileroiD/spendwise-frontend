@@ -1,22 +1,22 @@
-import { ACTION_TYPE } from "../actions";
+import { ActionType } from "../actions";
 
 const initialAccountsState = {
-    accounts: [],
+	accounts: [],
 };
 
 export const accountsReducer = (state = initialAccountsState, action) => {
-    switch (action.type) {
-        case ACTION_TYPE.SET_ACCOUNTS:
-            if (action.payload) {
-                return {
-                    ...state,
-                    accounts: [...action.payload],
-                };
-            } else {
-                return state;
-            }
+	switch (action.type) {
+		case ActionType.SET_ACCOUNTS:
+			if (action.payload) {
+				return {
+					...state,
+					accounts: [...action.payload],
+				};
+			} else {
+				return state;
+			}
 
-        default:
-            return state;
-    }
+		default:
+			return state;
+	}
 };

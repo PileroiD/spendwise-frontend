@@ -14,17 +14,11 @@ const SideWindow = lazy(() => import("./components/side-window/SideWindow"));
 const Main = lazy(() => import("./components/pages/main/Main"));
 const Register = lazy(() => import("./components/pages/auth/Register"));
 const Login = lazy(() => import("./components/pages/auth/Login"));
-const Footer = lazy(() => import("./components/footer/Footer"));
+const Footer = lazy(() => import("./components/footer/Footer.tsx"));
 const Records = lazy(() => import("./components/pages/records/Records"));
-const RecordCreator = lazy(() =>
-	import("./components/pages/record-creator/RecordCreator")
-);
-const RecordDetails = lazy(() =>
-	import("./components/pages/record-details/RecordDetails")
-);
-const AccountCreator = lazy(() =>
-	import("./components/pages/account-creator/AccountCreator")
-);
+const RecordCreator = lazy(() => import("./components/pages/record-creator/RecordCreator"));
+const RecordDetails = lazy(() => import("./components/pages/record-details/RecordDetails"));
+const AccountCreator = lazy(() => import("./components/pages/account-creator/AccountCreator"));
 const Accounts = lazy(() => import("./components/pages/accounts/Accounts"));
 const ErrorPage = lazy(() => import("./components/pages/error-page/ErrorPage"));
 
@@ -89,23 +83,14 @@ function App() {
 						<Route path="/login" element={<Login />} />
 
 						<Route path="/incomes" element={<Records />} />
-						<Route
-							path="/add-incomes"
-							element={<RecordCreator />}
-						/>
+						<Route path="/add-incomes" element={<RecordCreator />} />
 
 						<Route path="/record/:id" element={<RecordDetails />} />
 
 						<Route path="/expenses" element={<Records />} />
-						<Route
-							path="/add-expenses"
-							element={<RecordCreator />}
-						/>
+						<Route path="/add-expenses" element={<RecordCreator />} />
 
-						<Route
-							path="/add-accounts"
-							element={<AccountCreator />}
-						/>
+						<Route path="/add-accounts" element={<AccountCreator />} />
 						<Route path="/accounts" element={<Accounts />} />
 
 						<Route path="/history" element={<Records />} />
