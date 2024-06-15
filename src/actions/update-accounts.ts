@@ -4,10 +4,9 @@ import { request } from "../utils/request";
 import { setAccounts } from "./set-accounts";
 import { AccountsResponse } from "./../types/types";
 
-export const updateAccounts = () => (dispatch: Dispatch) => {
-	request("/accounts?records=true", "GET").then((response: AccountsResponse) => {
-		if (!response.error) {
-			dispatch(setAccounts(response.accounts));
-		}
-	});
+export const updateAccounts = () => async (dispatch: Dispatch) => {
+	const response: AccountsResponse = await request("/accounts?records=true", "GET");
+	if (!response.error) {
+		dispatch(setAccounts(response.accounts));
+	}
 };

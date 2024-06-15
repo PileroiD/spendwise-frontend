@@ -32,3 +32,8 @@ export interface AccountsResponse {
 	accounts: Account[];
 	error: Error | null;
 }
+
+export type SelectedOption = {
+	label: string;
+	value: string;
+} | null;

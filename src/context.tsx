@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-interface ThemeContextType {
+export interface ThemeContextType {
 	theme: string;
 	toggleTheme: () => void;
 }
@@ -14,7 +14,7 @@ const initialContext: ThemeContextType = {
 	toggleTheme: () => {},
 };
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(initialContext);
+export const ThemeContext = createContext<ThemeContextType>(initialContext);
 
 export const ThemeProvider: React.FC<ThemeProps> = ({ children }) => {
 	const [theme, setTheme] = useState<string>("light");
