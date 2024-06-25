@@ -1,21 +1,20 @@
 import styled from "styled-components";
-import { useContext } from "react";
 
-import { ThemeContext } from "../../context";
 import sunIcon from "../../icons/sun.icon";
 import moonIcon from "../../icons/moon.icon";
+import { useTheme } from "../../context";
 
 interface ThemeComponentProps {
 	className?: string;
 }
 
 const ThemeContainer: React.FC<ThemeComponentProps> = ({ className }) => {
-	const context = useContext(ThemeContext);
+	const context = useTheme();
 
 	return (
 		<div className={className}>
-			<div className="theme-icon" onClick={context.toggleTheme}>
-				{context.theme === "light" ? moonIcon : sunIcon}
+			<div className="theme-icon" onClick={context?.toggleTheme}>
+				{context?.theme.background === "#363537" ? moonIcon : sunIcon}
 			</div>
 		</div>
 	);

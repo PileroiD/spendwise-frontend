@@ -1,27 +1,30 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme, ThemeType } from "./theme/themes";
+import { GlobalStyles } from "./theme/globalStyles";
 
-export interface ThemeContextType {
-	theme: string;
+type InitialContextType = {
 	toggleTheme: () => void;
-}
-
-interface ThemeProps {
-	children?: React.ReactNode;
-}
-
-const initialContext: ThemeContextType = {
-	theme: "light",
-	toggleTheme: () => {},
+	theme: ThemeType;
 };
 
-export const ThemeContext = createContext<ThemeContextType>(initialContext);
+const ThemeToggleContext = createContext<InitialContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<ThemeProps> = ({ children }) => {
-	const [theme, setTheme] = useState<string>("light");
+export const useTheme = () => useContext(ThemeToggleContext);
 
-	const toggleTheme = () => {
-		setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+export const ThemeProviderComponent: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+	const [theme, setTheme] = useState<ThemeType>(lightTheme);
+
+	const toggleTheme = (): void => {
+		setTheme(theme === lightTheme ? darkTheme : lightTheme);
 	};
 
-	return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
+	return (
+		<ThemeToggleContext.Provider value={{ theme, toggleTheme }}>
+			<ThemeProvider theme={theme}>
+				<GlobalStyles />
+				{children}
+			</ThemeProvider>
+		</ThemeToggleContext.Provider>
+	);
 };

@@ -5,17 +5,17 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import "./index.css";
-import { ThemeProvider } from "./context";
+import { ThemeProviderComponent } from "./context";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
 	<BrowserRouter>
-		<ThemeProvider>
+		<ThemeProviderComponent>
 			<Provider store={store}>
 				<React.StrictMode>
 					<App />
 				</React.StrictMode>
 			</Provider>
-		</ThemeProvider>
+		</ThemeProviderComponent>
 	</BrowserRouter>
 );

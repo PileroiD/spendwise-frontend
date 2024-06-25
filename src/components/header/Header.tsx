@@ -63,7 +63,7 @@ const HeaderContainer: React.FC<{ className?: string }> = ({ className }) => {
 			<AuthButtons>
 				{isAuthenticated ? (
 					<div className="auth-wrapper">
-						<ThemeComponent />
+						{/* <ThemeComponent /> */}
 
 						<div className="user-email">{userEmail}</div>
 						<Button onClick={logout}>Log out</Button>
@@ -94,7 +94,7 @@ const Header = styled(HeaderContainer)`
 	border-top: none;
 	padding: 0 30px;
 	box-shadow: 0px -2px 15px #000;
-	background-color: #fff;
+	background: #fff;
 	z-index: 999;
 
 	& .auth-wrapper {
